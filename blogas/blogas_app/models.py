@@ -32,3 +32,22 @@ class Post(models.Model):
     
     class Meta:
         ordering = ["date"]
+
+class Comment(models.Model):
+    author = models.ForeignKey(
+        Author,
+        on_delete=models.CASCADE,
+        related_name="comment",
+        verbose_name=_("author")
+    )
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name="comment",
+        verbose_name=_("post")
+    )
+    comment = models.TextField(_("comment"), max_length=4000)
+    date = models.DateField(_("date"))
+
+    def __str__(self) -> str:
+        return f"{self.author} {self.comment} {self.date}"
