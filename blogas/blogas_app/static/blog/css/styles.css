@@ -1,0 +1,87 @@
+*,*:before,*:after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body,html {
+    max-width: 100%;
+}
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 52px calc(100vh - 102px) 50px;
+    grid-template-areas: 
+        "header"
+        "main"
+        "footer"
+    ;
+}
+
+header {
+    grid-area: header;
+    width: 100%;
+    padding: 1rem;
+    background: rgb(61, 49, 32);
+    color: #fff;
+}
+
+main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.cards_list {
+    display: block;
+    list-style: none;
+    width: 500px;
+}
+
+.cards_list h2 {
+    text-align: center;
+}
+.card span {
+    display: inline-block;
+    margin: .5rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.comments-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    list-style: none;
+}
+
+.comment-card {
+    margin:1rem 0;
+    width: 450px;
+    border: 1px solid pink;
+}
+
+.comment-card p:nth-last-child(1) {
+    display: block;
+    margin: 1rem 0 0;
+    padding: 1rem 0;
+    background-color: rgb(235, 226, 226);
+}
+
+footer {
+    grid-area: footer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(61, 49, 32);
+}
+
+

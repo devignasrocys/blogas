@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}Welcome to {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>Welcome to blog!</h1>
+<ul class="cards_list">
+{% for post in all_posts  %}
+    <li class="card">
+        <h2>{{post.article}}</h2>
+        <p>{{post.post|slice:"0:250"}}...</p>
+        <span>
+            <p>Author: {{post.author}} </p>
+            <a href="{% url 'post' post.id %}"> Read more </a>
+        </span>
+    </li>
+{% endfor %}
+</ul>
+{% endblock content %}

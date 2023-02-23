@@ -10,6 +10,14 @@ class Author(models.Model):
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
 
+    def display_posts(self):
+        return ", ".join(post.post for post in self.post.all())
+    display_posts.short_description = _("posts")
+
+    def display_comments(self):
+        return ", ".join(comment.comment for comment in self.comment.all())
+    display_comments.short_description = _("comments")
+
 
 class Post(models.Model):
     id = models.UUIDField(
@@ -18,6 +26,7 @@ class Post(models.Model):
         default=uuid.uuid4,
         help_text=_("Unique ID for ")
     )
+
     author = models.ForeignKey(
         Author,
         on_delete=models.CASCADE,
@@ -25,6 +34,7 @@ class Post(models.Model):
         verbose_name=_("author")
     )
     date = models.DateField(_("date"))
+    article = models.CharField(_("article"), max_length=100)
     post = models.TextField(_("post"), max_length=4000)
 
     def __str__(self) -> str:
@@ -32,6 +42,15 @@ class Post(models.Model):
     
     class Meta:
         ordering = ["date"]
+    
+    def display_post(self):
+        return self.post
+    display_post.short_description = _("post")
+
+    def display_date(self):
+        return self.date
+    display_date.short_description = _("date")
+
 
 class Comment(models.Model):
     author = models.ForeignKey(
@@ -51,3 +70,11 @@ class Comment(models.Model):
 
     def __str__(self) -> str:
         return f"{self.author} {self.comment} {self.date}"
+    
+    def display_comment(self):
+        return self.comment
+    display_comment.short_description = _("comment")
+
+    def display_date(self):
+        return self.date
+    display_date.short_description = _("date")

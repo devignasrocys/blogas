@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} {{block.super}} {% endblock title %}
+{% block content %}
+<ul class="cards_list">
+    {% if object %}
+        <li class="card"> 
+            <h1>{{object.article}}</h1>
+            <p>{{object.post}}</p>
+            {% if object.comment %}
+            <ul class="comments-list">
+                {% for comment in object.comment.all%}
+                <li class="comment-card">
+                    <p><b>{{comment.author}}</b></p>
+                    <p>{{comment.date}}</p>
+                    <p>{{comment.comment}}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+    {% else %}
+        <h1>Post dosent exit</h1>
+    {% endif %}
+</ul>
+{% endblock content %}
